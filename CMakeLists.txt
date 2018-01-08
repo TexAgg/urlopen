@@ -17,3 +17,4 @@ add_test(twitter urlopen "twitter.com.url")
 
 install(TARGETS urlopen DESTINATION /usr/local/bin)
 install(FILES urlopen.desktop DESTINATION /usr/share/applications)
+install(FILELS urlopen.1 DESTINATION /usr/local/man/man1)
