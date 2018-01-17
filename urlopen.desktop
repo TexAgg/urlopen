@@ -6,4 +6,5 @@ Comment=Open Windows url files
 Exec=/usr/local/bin/urlopen %F
 MimeType=application/x-mswinurl
 Terminal=true
+Icon=/usr/share/pixmaps/urlopen_64x64.png
 NoDisplay=true
