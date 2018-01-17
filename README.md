@@ -1,6 +1,6 @@
 # urlopen
 
-An application for opening Windows URL files on Ubuntu.
+An application for opening Windows Internet Shortcut files (`.url`) on Ubuntu.
 
 ## Installation
 First, clone or download the repository to any directory.
