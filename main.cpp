@@ -13,6 +13,6 @@ int main(int argc, char** argv)
 	}
 
 	std::string fname(argv[1]);
-	UrlFile uf (fname);
+	UrlFile uf(fname);
 	uf.open_shortcut();
 }

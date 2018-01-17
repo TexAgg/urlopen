@@ -14,13 +14,17 @@ class UrlFile
 {
 	/*
 	* Dictionary mapping the keys to the values from the file.
-	* Only one entry is used so most of this is wasted space.
+	* Only one entry is used so most of this is wasted space and overhead.
 	*/
 	std::unordered_map<std::string, std::string> _entries;
 	// I'm not sure what this means but we don't need it.
 	std::string _group;
 
 public:
+
+	/*
+	* Constructs a url file given the url.
+	*/
 	UrlFile(std::string fname);
 
 	/*

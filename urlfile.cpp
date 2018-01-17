@@ -11,6 +11,7 @@ using namespace std;
 UrlFile::UrlFile(string fname)
 {
 	ifstream infile(fname);
+	// Counter to determine the current line in the file.
 	int line_count = 0;
 
 	// https://stackoverflow.com/a/7868998/5415895
@@ -19,6 +20,7 @@ UrlFile::UrlFile(string fname)
 	{
 		regex pattern ("(.+)=(.+)[\r\n]*");
 
+		// Parse the first line.
 		if (line_count == 0)
 		{
 			regex group_pattern("\\[(.+)\\][\r\n]*");
@@ -68,6 +70,6 @@ void UrlFile::open_shortcut()
 	}
 	else
 	{
-		// hell yeah dude
+		// There's really nothing to do here.
 	}
 }

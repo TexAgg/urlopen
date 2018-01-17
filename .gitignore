@@ -1,2 +1,10 @@
-_build/
 .vscode/
+
+_build/
+*.deb
+
+package.sh
+temp.sh
+uninstall.sh
+
+img/*.odg
