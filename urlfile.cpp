@@ -1,12 +1,26 @@
 #include <stdexcept>
 #include <unistd.h>
 #include <iostream>
+#include <sstream>
 
 #include "urlfile.hpp"
 
 using namespace std;
 
-const string TOP_SECTION = "InternetShortcut";
+const string UrlFile::TOP_SECTION = "InternetShortcut";
+
+string UrlFile::get_property(string key)
+{
+	const char* temp = _ini.GetValue(TOP_SECTION.c_str(), key.c_str(), NULL);
+	if (!temp)
+	{
+		stringstream ss;
+		ss << "File does not contain key " << key << " in section " << TOP_SECTION;
+		throw invalid_argument(ss.str());
+	}
+	string value(temp);
+	return value;
+}
 
 UrlFile::UrlFile(string fname)
 {
@@ -20,12 +34,7 @@ void UrlFile::open_shortcut()
 	// https://stackoverflow.com/a/1950367/5415895
 	// https://stackoverflow.com/q/8371363/5415895
 	
-	const char* url_char = _ini.GetValue(TOP_SECTION.c_str(), "URL", NULL);
-
-	if (!url_char)
-		throw invalid_argument("File contained no URL field");
-	
-	string url(url_char);
+	string url = get_property("URL");
 
 	pid_t process = fork();
 	if (process < 0)
@@ -42,4 +51,9 @@ void UrlFile::open_shortcut()
 	{
 		// There's really nothing to do here.
 	}
+}
+
+string UrlFile::get_url()
+{
+	return get_property("URL");
 }

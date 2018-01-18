@@ -14,7 +14,11 @@ class UrlFile
 {
 	CSimpleIniA _ini;
 
+	std::string get_property(std::string key);
+
 public:
+
+	static const std::string TOP_SECTION;
 
 	/*
 	* Constructs a url file given the url.
@@ -26,6 +30,8 @@ public:
 	* Requires `xdg-open`.
 	*/
 	void open_shortcut();
+
+	std::string get_url();
 };
 
 #endif

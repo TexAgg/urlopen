@@ -1,7 +1,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.3)
 project("urlopen")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -std=c++11")
 
 include_directories(${PROJECT_SOURCE_DIR}/simpleini)
 
@@ -15,7 +15,8 @@ file(COPY setup.sh DESTINATION ${PROJECT_BINARY_DIR})
 file(COPY twitter.com.url DESTINATION ${PROJECT_BINARY_DIR})
 enable_testing()
 # This should open "https://twitter.com/search-advanced" in your browser.
-add_test(twitter urlopen "twitter.com.url")
+add_test(twitter ./urlopen "twitter.com.url")
+add_test(print_twitter ./urlopen -u "twitter.com.url")
 
 install(TARGETS urlopen DESTINATION /usr/local/bin)
 install(FILES urlopen.desktop DESTINATION /usr/share/applications)

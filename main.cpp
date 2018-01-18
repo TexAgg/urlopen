@@ -1,18 +1,40 @@
 #include <iostream>
 #include <string>
-#include <stdlib.h>  
+#include <stdlib.h>
+#include <getopt.h>  
 
 #include "urlfile.hpp"
 
 int main(int argc, char** argv)
 {
-	if (argc < 2)
+	bool print_url = false;
+	int c;
+	while ((c = getopt(argc, argv, "u:")) != -1)
 	{
-		std::cerr << "No file passed." << std::endl;
-		exit(EXIT_FAILURE);
+		switch (c)
+		{
+			case 'u':
+				print_url = true;
+				break;
+			default:
+				break;
+
+		}
+	}
+	if (!argv[optind]) 
+	{
+  		std::cerr << "No filename passed" << std::endl;
+  		exit(EXIT_FAILURE);
 	}
 
-	std::string fname(argv[1]);
+	std::string fname(argv[argc-1]);
 	UrlFile uf(fname);
-	uf.open_shortcut();
+	if (print_url)
+	{
+		std::cout << uf.get_url() << std::endl;
+	}
+	else
+	{
+		uf.open_shortcut();
+	}
 }
