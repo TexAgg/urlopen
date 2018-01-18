@@ -1,4 +1,5 @@
 .vscode/
+resources.txt
 
 _build/
 *.deb

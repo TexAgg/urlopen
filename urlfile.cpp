@@ -1,5 +1,3 @@
-#include <fstream>
-#include <regex>
 #include <stdexcept>
 #include <unistd.h>
 #include <iostream>
@@ -8,44 +6,12 @@
 
 using namespace std;
 
+const string TOP_SECTION = "InternetShortcut";
+
 UrlFile::UrlFile(string fname)
 {
-	ifstream infile(fname);
-	// Counter to determine the current line in the file.
-	int line_count = 0;
-
-	// https://stackoverflow.com/a/7868998/5415895
-	string line;
-	while (getline(infile, line))
-	{
-		regex pattern ("(.+)=(.+)[\r\n]*");
-
-		// Parse the first line.
-		if (line_count == 0)
-		{
-			regex group_pattern("\\[(.+)\\][\r\n]*");
-
-			smatch sm;
-			bool succeed = regex_match(line, sm, group_pattern);
-			if (!succeed || sm.size() < 2)
-				throw invalid_argument("Invalid syntax on line 0: " + line);
-			
-			_group = sm[1];
-		}
-		else
-		{
-			smatch sm;
-			bool succeed = regex_match(line, sm, pattern);
-			if (!succeed || sm.size() < 3)
-				throw invalid_argument("Invalid syntax on line " + to_string(line_count) + ": " + line);
-			
-			string key = sm[1];
-			string value = sm[2];
-			_entries[key] = value;
-		}
-
-		line_count++;
-	}
+	_ini.SetUnicode();
+	_ini.LoadFile(fname.c_str());
 }
 
 void UrlFile::open_shortcut()
@@ -54,8 +20,12 @@ void UrlFile::open_shortcut()
 	// https://stackoverflow.com/a/1950367/5415895
 	// https://stackoverflow.com/q/8371363/5415895
 	
-	if (_entries.find("URL") == _entries.end())
+	const char* url_char = _ini.GetValue(TOP_SECTION.c_str(), "URL", NULL);
+
+	if (!url_char)
 		throw invalid_argument("File contained no URL field");
+	
+	string url(url_char);
 
 	pid_t process = fork();
 	if (process < 0)
@@ -64,9 +34,9 @@ void UrlFile::open_shortcut()
 	}
 	if (process == 0)
 	{
-		cout << _entries["URL"] << endl;
+		cout << url << endl;
 		// https://stackoverflow.com/a/12596877/5415895
-		execl("/usr/bin/xdg-open", "xdg-open", _entries["URL"].c_str(), (char*) NULL);
+		execl("/usr/bin/xdg-open", "xdg-open", url.c_str(), (char*) NULL);
 	}
 	else
 	{
