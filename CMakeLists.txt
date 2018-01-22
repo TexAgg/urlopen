@@ -3,12 +3,17 @@ project("urlopen")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -std=c++11")
 
+set(argparse_dir ${PROJECT_SOURCE_DIR}/argparse)
+
 include_directories(${PROJECT_SOURCE_DIR}/simpleini)
+include_directories(${argparse_dir})
+
+add_library(argparse ${argparse_dir}/argparse.c ${argparse_dir}/argparse.h)
 
 add_library(urlfile urlfile.cpp urlfile.hpp)
 
 add_executable(urlopen main.cpp)
-target_link_libraries(urlopen urlfile)
+target_link_libraries(urlopen urlfile argparse)
 
 file(COPY setup.sh DESTINATION ${PROJECT_BINARY_DIR})
 
