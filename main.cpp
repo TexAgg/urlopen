@@ -15,7 +15,8 @@ int main(int argc, const char** argv)
 		NULL,
 	};
 
-	bool print_version = false;
+	// If this is a bool, the parser doesn't handle it correctly every time.
+	int print_version = 0;
 	bool print_url = false;
 	char* c_fname = NULL;
 	argparse_option options[] = {
@@ -30,39 +31,36 @@ int main(int argc, const char** argv)
 	argparse_init(&ap, options, usage, 0);
 	argc = argparse_parse(&ap, argc, argv);
 
-	std::cout << print_version << std::endl;
 	if (print_version)
 	{
 		std::string version = URLOPEN_VERSION;
 		std::cout << version << std::endl;
-		//exit(EXIT_SUCCESS);
+		exit(EXIT_SUCCESS);
+	}
+
+	int i;
+	if (argc != 0) 
+	{
+		for (i = 0; i < argc; i++) 
+		{
+			// Do nothing: just let i increment.
+		}
 	}
 	else
 	{
-		int i;
-		if (argc != 0) 
-		{
-			for (i = 0; i < argc; i++) 
-			{
-				// Do nothing: just let i increment.
-			}
-		}
-		else
-		{
-			std::cerr << "No filename given!" << std::endl;
-			exit(EXIT_FAILURE);
-		}
+		std::cerr << "No filename given!" << std::endl;
+		exit(EXIT_FAILURE);
+	}
 
-		std::string fname(argv[i-1]);
-		UrlFile uf(fname);
+	std::string fname(argv[i-1]);
+	UrlFile uf(fname);
 
-		if (print_url)
-		{
-			std::cout << uf.get_url() << std::endl;
-		}
-		else
-		{
-			uf.open_shortcut();
-		}
+	if (print_url)
+	{
+		std::cout << uf.get_url() << std::endl;
+	}
+	else
+	{
+		uf.open_shortcut();
 	}
 }
