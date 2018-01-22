@@ -7,41 +7,43 @@
 
 #include "urlfile.hpp"
 
-std::string concat_chars(int c, const char** v)
-{
-	std::string res = "";
-	for (int i = 0; i < c; i++)
-	{
-		res += v[i];
-	}
-	return res;
-}
-
 int main(int argc, const char** argv)
 {
-	std::cout << concat_chars(argc, argv) << std::endl;
-
+	static const char *const usage[] = {
+		"urlopen [options] <filename>",
+		NULL,
+		NULL,
+	};
 	bool print_url = false;
 	char* c_fname = NULL;
 	argparse_option options[] = {
 		OPT_HELP(),
 		OPT_GROUP("Options"),
 		OPT_BOOLEAN('p', "print-url", &print_url, "Display the url and quit"),
-		OPT_STRING('u', NULL, &c_fname, "The file name (required)"),
 		OPT_END()
 	};
 
 	argparse ap;
-	argparse_init(&ap, options, NULL, 0);
+	argparse_init(&ap, options, usage, 0);
 	argc = argparse_parse(&ap, argc, argv);
+	std::cout << argc << std::endl;
 
-	if (!c_fname)
+	int i;
+	if (argc != 0) 
+	{
+        for (i = 0; i < argc; i++) 
+		{
+        	// Do nothing: just let i increment.
+			//printf("argv[%d]: %s\n", i, argv[i]);
+        }
+    }
+	else
 	{
 		std::cerr << "No filename given!" << std::endl;
 		exit(EXIT_FAILURE);
 	}
 
-	std::string fname(c_fname);
+	std::string fname(argv[i-1]);
 	UrlFile uf(fname);
 
 	if (print_url)
