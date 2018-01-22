@@ -43,7 +43,7 @@ void UrlFile::open_shortcut()
 	}
 	if (process == 0)
 	{
-		cout << url << endl;
+		//cout << url << endl;
 		// https://stackoverflow.com/a/12596877/5415895
 		execl("/usr/bin/xdg-open", "xdg-open", url.c_str(), (char*) NULL);
 	}

@@ -7,13 +7,19 @@
 
 #include "urlfile.hpp"
 
+std::string concat_chars(int c, const char** v)
+{
+	std::string res = "";
+	for (int i = 0; i < c; i++)
+	{
+		res += v[i];
+	}
+	return res;
+}
+
 int main(int argc, const char** argv)
 {
-	if (argc < 2)
-	{
-		std::cerr << "No file passed." << std::endl;
-		exit(EXIT_FAILURE);
-	}
+	std::cout << concat_chars(argc, argv) << std::endl;
 
 	bool print_url = false;
 	char* c_fname = NULL;

@@ -20,8 +20,8 @@ file(COPY setup.sh DESTINATION ${PROJECT_BINARY_DIR})
 file(COPY twitter.com.url DESTINATION ${PROJECT_BINARY_DIR})
 enable_testing()
 # This should open "https://twitter.com/search-advanced" in your browser.
-add_test(twitter ./urlopen "twitter.com.url")
-add_test(print_twitter ./urlopen -u "twitter.com.url")
+add_test(twitter ./urlopen -u "twitter.com.url")
+add_test(print_twitter ./urlopen -p "twitter.com.url")
 
 install(TARGETS urlopen DESTINATION /usr/local/bin)
 install(FILES urlopen.desktop DESTINATION /usr/share/applications)
