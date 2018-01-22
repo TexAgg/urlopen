@@ -1,13 +1,26 @@
 .TH urlopen 1 "7 January 2018" "Version 2.0.0"
 
 .SH NAME
-urlopen \- a tool for opening windows' internet shortcut files
+urlopen \- a tool for opening windows internet shortcut files
 
 .SH SYNOPSIS
 .B urlopen
 [
-.I FILENAME
+.I OPTIONS
 ]
+<
+.I FILENAME
+>
+
+.SH OPTIONS
+
+.TP
+.BR \-h
+Print the help message.
+
+.TP
+.BR \-p ", " \-\-print\-url
+Display the url and exit.
 
 .SH DESCRIPTION
 Open the shortcut file in the default browser.
