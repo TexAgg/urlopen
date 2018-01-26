@@ -7,4 +7,5 @@ _build/
 temp.sh
 uninstall.sh
 
-img/*.odg
+#img/*.odg
+.~lock.*

@@ -37,7 +37,7 @@ sed -i 's/\<application\/x-mswinurl=urlopen.desktop\>//g' $HOME/.local/share/app
 sudo sed -i "s/\<application\/x-mswinurl url\>//g" /etc/mime.types
 EOM
 
-fpm -s dir -t deb -n "urlopen" --after-install $TEMP -v $VERSION \
+fpm -s dir -t deb -n "urlopen" -f --after-install $TEMP -v $VERSION \
 	--after-remove $TEMP2 \
 	--deb-build-depends build-essential \
 	--description "A tool for opening windows' internet shortcut files." \
