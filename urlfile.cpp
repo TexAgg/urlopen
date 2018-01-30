@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <iostream>
 #include <sstream>
+#include <regex>
 
 #include "urlfile.hpp"
 
@@ -11,6 +12,13 @@ namespace urlopen
 {
 
 const string UrlFile::TOP_SECTION = "InternetShortcut";
+
+/*
+* Regex for parsing a url, from
+* https://regexr.com/3k0ob
+* The source has more documentation on the different groups.
+*/
+const regex url_pattern("^(?:(http[s]?|ftp[s]):\\/\\/)?([^:\\/\\s]+)(:[0-9]+)?((?:\\/\\w+)*\\/)([\\w\\-\\.]+[^#?\\s]+)([^#\\s]*)?(#[\\w\\-]+)?$");
 
 string UrlFile::get_property(string key)
 {
@@ -59,6 +67,15 @@ void UrlFile::open_shortcut()
 string UrlFile::get_url()
 {
 	return get_property("URL");
+}
+
+string UrlFile::get_domain()
+{
+	string url = get_url();
+	smatch sm;
+	regex_match(url, sm, url_pattern);
+
+	return sm[2];
 }
 
 }

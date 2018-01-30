@@ -17,6 +17,7 @@ add_library(urlfile urlfile.cpp urlfile.hpp)
 
 add_executable(urlopen main.cpp)
 target_link_libraries(urlopen urlfile argparse)
+set_target_properties(urlopen PROPERTIES COMPILE_FLAGS -w)
 
 file(COPY setup.sh DESTINATION ${PROJECT_BINARY_DIR})
 

@@ -18,12 +18,14 @@ int main(int argc, const char** argv)
 	// If this is a bool, the parser doesn't handle it correctly every time.
 	int print_version = 0;
 	bool print_url = false;
+	int print_domain = 0;
 	char* c_fname = NULL;
 	argparse_option options[] = {
 		OPT_HELP(),
 		OPT_BOOLEAN('v', "version", &print_version, "Display the version and exit"),
 		OPT_GROUP("Options"),
 		OPT_BOOLEAN('p', "print-url", &print_url, "Display the url and exit"),
+		OPT_BOOLEAN(NULL, "print-domain", &print_domain, "Display the domain name"),
 		OPT_END()
 	};
 
@@ -58,6 +60,10 @@ int main(int argc, const char** argv)
 	if (print_url)
 	{
 		std::cout << uf.get_url() << std::endl;
+	}
+	else if (print_domain)
+	{
+		std::cout << uf.get_domain() << std::endl;
 	}
 	else
 	{

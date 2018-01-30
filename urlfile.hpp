@@ -11,7 +11,7 @@ namespace urlopen
 /*
 * Class for representing the structure of a .url file.
 *
-* I couldn't find an official standard for url files but
+* I couldn't find an official standard for shortcut files but
 * this guide was useful: http://bit.ly/2m6FiAi
 */
 class UrlFile
@@ -22,6 +22,10 @@ class UrlFile
 
 public:
 
+	/*
+	* Shortcut files are structured like ini files, with multiple sections.
+	* We only care about one of those sections, however.
+	*/
 	static const std::string TOP_SECTION;
 
 	/*
@@ -35,7 +39,14 @@ public:
 	*/
 	void open_shortcut();
 
+	/*
+	* Returns the url from the file.
+	*/
 	std::string get_url();
+	/*
+	* Returns only the domain/host name from the url in the file.
+	*/
+	std::string get_domain();
 };
 
 }
