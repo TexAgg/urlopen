@@ -1,6 +1,8 @@
 # Creates a .deb package.
 
 NAUTILUS_ACTION='urlopen_action.desktop'
+# DON'T FORGET TO KEEP THIS UP TO DATE WITH urlopen.1 and CMakeLists.txt
+VERSION=3.0.1
 
 # Create temporary directory for packaging.
 TEMPDIR=$(mktemp -d -p .)
@@ -25,9 +27,6 @@ do
 done
 
 cp -t $TEMPDIR ${NAUTILUS_ACTION}
-
-# DON'T FORGET TO KEEP THIS UP TO DATE WITH urlopen.1 and CMakeLists.txt
-VERSION=3.0.0
 
 # Create a temporary file with the post-install script.
 TEMP=$(mktemp -p .)
