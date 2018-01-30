@@ -17,8 +17,12 @@ cp -t $TEMPDIR/usr/local/man/man1 urlopen.1
 mkdir -p $TEMPDIR/usr/share/pixmaps
 cp -t $TEMPDIR/usr/share/pixmaps img/urlopen_64x64.png
 
-mkdir -p $TEMPDIR/usr/share/icons/humanity/mimes/256
-cp -t $TEMPDIR/usr/share/icons/humanity/mimes/256 img/application-x-mswinurl.svg
+# Icon for each size (see https://github.com/TexAgg/urlopen/issues/1).
+for i in 256 128 64 48 32 24 22 16
+do
+	mkdir -p $TEMPDIR/usr/share/icons/Humanity/mimes/${i}
+	cp -t $TEMPDIR/usr/share/icons/Humanity/mimes/${i} img/application-x-mswinurl.svg
+done
 
 cp -t $TEMPDIR ${NAUTILUS_ACTION}
 
