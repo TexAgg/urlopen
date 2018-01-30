@@ -5,6 +5,9 @@
 
 #include <SimpleIni.h>
 
+namespace urlopen
+{
+
 /*
 * Class for representing the structure of a .url file.
 *
@@ -34,5 +37,7 @@ public:
 
 	std::string get_url();
 };
+
+}
 
 #endif

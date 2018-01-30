@@ -7,6 +7,9 @@
 
 using namespace std;
 
+namespace urlopen
+{
+
 const string UrlFile::TOP_SECTION = "InternetShortcut";
 
 string UrlFile::get_property(string key)
@@ -56,4 +59,6 @@ void UrlFile::open_shortcut()
 string UrlFile::get_url()
 {
 	return get_property("URL");
+}
+
 }

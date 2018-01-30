@@ -2,7 +2,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.0.2)
 cmake_policy(SET CMP0048 NEW)
 project("urlopen" VERSION "3.0.1")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(argparse_dir ${PROJECT_SOURCE_DIR}/argparse)
 

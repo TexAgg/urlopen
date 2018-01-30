@@ -53,7 +53,7 @@ int main(int argc, const char** argv)
 	}
 
 	std::string fname(argv[i-1]);
-	UrlFile uf(fname);
+	urlopen::UrlFile uf(fname);
 
 	if (print_url)
 	{
