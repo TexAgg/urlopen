@@ -1,6 +1,6 @@
 # Creates a .deb package.
 
-NAUTILUS_ACTION='45dd6dc2-09da-45da-9302-e1f00abb24b1.desktop'
+NAUTILUS_ACTION='urlopen_action.desktop'
 
 # Create temporary directory for packaging.
 TEMPDIR=$(mktemp -d -p .)
