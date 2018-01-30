@@ -1,0 +1,20 @@
+[Desktop Entry]
+Type=Action
+Description[en_US]=Display the url
+Description[en]=Display the url
+Description[C]=Display the url
+ToolbarLabel[en_US]=View url
+ToolbarLabel[en]=View url
+ToolbarLabel[C]=View url
+Name[en_US]=View url
+Name[en]=View url
+Name[C]=View url
+Profiles=profile-zero;
+
+[X-Action-Profile profile-zero]
+MimeTypes=application/x-mswinurl;*;
+ExecutionMode=DisplayOutput
+Exec=urlopen -p %f
+Name[en_US]=Default profile
+Name[en]=Default profile
+Name[C]=Default profile
