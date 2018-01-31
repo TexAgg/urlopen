@@ -8,6 +8,13 @@
 namespace urlopen
 {
 
+// The only browsers I care about.
+enum Browser
+{
+	CHROME,
+	FIREFOX
+};
+
 /*
 * Class for representing the structure of a .url file.
 *
@@ -40,9 +47,15 @@ public:
 	void open_shortcut();
 
 	/*
+	* Open the url in browser b.
+	*/
+	void open_private_window(Browser b);
+
+	/*
 	* Returns the url from the file.
 	*/
 	std::string get_url();
+
 	/*
 	* Returns only the domain/host name from the url in the file.
 	*/

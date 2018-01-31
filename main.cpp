@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <stdlib.h>
-#include <getopt.h>  
+#include <getopt.h>
 
 #include <argparse.h>
 
@@ -19,13 +19,14 @@ int main(int argc, const char** argv)
 	int print_version = 0;
 	bool print_url = false;
 	int print_domain = 0;
-	char* c_fname = NULL;
+	const char* browser = NULL;
 	argparse_option options[] = {
 		OPT_HELP(),
-		OPT_BOOLEAN('v', "version", &print_version, "Display the version and exit"),
+		OPT_BOOLEAN('v', "version", &print_version, "Display the version and exit."),
 		OPT_GROUP("Options"),
-		OPT_BOOLEAN('p', "print-url", &print_url, "Display the url and exit"),
-		OPT_BOOLEAN(NULL, "print-domain", &print_domain, "Display the domain name"),
+		OPT_BOOLEAN('p', "print-url", &print_url, "Display the url and exit."),
+		OPT_BOOLEAN(NULL, "print-domain", &print_domain, "Display the domain name."),
+		OPT_STRING(NULL, "private-window", &browser, "Open the url in a private/incognito window using <browser>. Acceptable values are 'CHROME' and 'FIREFOX'."),
 		OPT_END()
 	};
 
@@ -64,6 +65,28 @@ int main(int argc, const char** argv)
 	else if (print_domain)
 	{
 		std::cout << uf.get_domain() << std::endl;
+	}
+	else if (browser)
+	{
+		std::string s(browser);
+		urlopen::Browser b_type;
+		if (s == "FIREFOX")
+		{
+			b_type = urlopen::Browser::FIREFOX;
+		}
+		else if (s == "CHROME")
+		{
+			b_type = urlopen::Browser::CHROME;
+		}
+		else
+		{
+			std::cerr << "Invalid option for --private-window: " << s << std::endl;
+			std::cerr << "Valid options are 'CHROME' and 'FIREFOX'" << std::endl;
+			exit(EXIT_FAILURE);
+		}
+
+		std::cout << "Cool" << std::endl;
+		uf.open_private_window(b_type);
 	}
 	else
 	{

@@ -26,6 +26,8 @@ enable_testing()
 # This should open "https://twitter.com/search-advanced" in your browser.
 add_test(twitter ./urlopen "twitter.com.url")
 add_test(print_twitter ./urlopen -p "twitter.com.url")
+add_test(private_chrome ./urlopen --private-window CHROME "twitter.com.url")
+add_test(private_firefox ./urlopen --private-window FIREFOX "twitter.com.url")
 
 install(TARGETS urlopen DESTINATION /usr/local/bin)
 install(FILES urlopen.desktop DESTINATION /usr/share/applications)
